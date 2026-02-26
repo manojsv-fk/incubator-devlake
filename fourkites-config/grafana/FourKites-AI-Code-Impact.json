@@ -1,0 +1,399 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": { "type": "datasource", "uid": "grafana" },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "FourKites AI Code Impact – tracks AI-generated code from GitHub Copilot and Claude Code",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": { "type": "datasource", "uid": "grafana" },
+      "gridPos": { "h": 3, "w": 24, "x": 0, "y": 0 },
+      "id": 1,
+      "options": {
+        "code": { "language": "plaintext", "showLineNumbers": false, "showMiniMap": false },
+        "content": "**Data Sources Required:** `aicode` plugin (GitHub Copilot Metrics API + commit trailer analysis).\n\n**Tables used:** `_tool_aicode_copilot_metrics`, `_tool_aicode_daily_aggregates`, `_tool_aicode_commit_metrics`.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [{ "datasource": { "type": "datasource", "uid": "grafana" }, "queryType": "randomWalk", "refId": "A" }],
+      "title": "Dashboard Introduction",
+      "type": "text"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Percentage of all new lines added that were AI-generated (Copilot or Claude), averaged across all repos, for the selected period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue", "value": null },
+              { "color": "green", "value": 20 },
+              { "color": "yellow", "value": 40 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 3 },
+      "id": 2,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  ROUND(AVG(ai_code_ratio), 1) AS ai_code_ratio\nFROM _tool_aicode_daily_aggregates\nWHERE\n  date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND connection_id = $connection_id",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "AI Code Ratio (avg across all repos)",
+      "type": "stat"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Daily Copilot acceptance rate: lines accepted / lines suggested × 100.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 20 },
+              { "color": "green", "value": 30 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 3 },
+      "id": 3,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  ROUND(AVG(acceptance_rate), 1) AS acceptance_rate\nFROM _tool_aicode_copilot_metrics\nWHERE\n  date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND connection_id = $connection_id",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "Copilot Acceptance Rate",
+      "type": "stat"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Total lines of code accepted by developers from Copilot in the selected period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "blue", "value": null }]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 6, "x": 12, "y": 3 },
+      "id": 4,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false }, "textMode": "auto" },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  SUM(total_lines_accepted) AS lines_accepted\nFROM _tool_aicode_copilot_metrics\nWHERE\n  date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND connection_id = $connection_id",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "Total Lines Accepted (Copilot)",
+      "type": "stat"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Number of commits in the period that contain an AI attribution trailer (Copilot, Claude, or generic AI).",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "purple", "value": null }]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 6, "x": 18, "y": 3 },
+      "id": 5,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false }, "textMode": "auto" },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  COUNT(*) AS ai_commits\nFROM _tool_aicode_commit_metrics\nWHERE\n  ai_generated = 1\n  AND authored_at >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND connection_id = $connection_id",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "AI-Attributed Commits",
+      "type": "stat"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Daily trend of AI-generated code ratio (%) across all repositories.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line", "fillOpacity": 10, "gradientMode": "none", "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "lineInterpolation": "smooth", "lineWidth": 2, "pointSize": 5, "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false, "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" } },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "id": 6,
+      "options": { "legend": { "calcs": ["mean", "lastNotNull"], "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi", "sort": "none" } },
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  date AS time,\n  ROUND(AVG(ai_code_ratio), 2) AS 'AI Code Ratio %'\nFROM _tool_aicode_daily_aggregates\nWHERE\n  $__timeFilter(date)\n  AND connection_id = $connection_id\nGROUP BY date\nORDER BY date ASC",
+          "refId": "A",
+          "format": "time_series"
+        }
+      ],
+      "title": "AI Code Ratio Over Time (all repos)",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Daily Copilot suggestions vs. lines accepted in the selected period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "bars", "fillOpacity": 60, "gradientMode": "none", "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "lineInterpolation": "linear", "lineWidth": 1, "pointSize": 5, "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false, "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" } },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "id": 7,
+      "options": { "legend": { "calcs": ["sum"], "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi", "sort": "none" } },
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  date AS time,\n  total_lines_suggested AS 'Lines Suggested',\n  total_lines_accepted AS 'Lines Accepted'\nFROM _tool_aicode_copilot_metrics\nWHERE\n  $__timeFilter(date)\n  AND connection_id = $connection_id\nORDER BY date ASC",
+          "refId": "A",
+          "format": "time_series"
+        }
+      ],
+      "title": "Copilot Lines: Suggested vs. Accepted",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "AI-generated commits broken down by tool (Copilot, Claude, other AI).",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "hideFrom": { "legend": false, "tooltip": false, "viz": false } },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 16 },
+      "id": 8,
+      "options": { "displayLabels": ["percent"], "legend": { "displayMode": "table", "placement": "right", "showLegend": true, "values": ["value", "percent"] }, "pieType": "donut", "tooltip": { "mode": "single", "sort": "none" } },
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  CASE\n    WHEN ai_tool = 'copilot' THEN 'GitHub Copilot'\n    WHEN ai_tool = 'claude' THEN 'Claude / Claude Code'\n    WHEN ai_tool = 'other_ai' THEN 'Other AI'\n    ELSE 'Human'\n  END AS tool,\n  COUNT(*) AS commits\nFROM _tool_aicode_commit_metrics\nWHERE\n  authored_at >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND connection_id = $connection_id\nGROUP BY ai_tool\nORDER BY commits DESC",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "AI Commits by Tool",
+      "type": "piechart"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Per-repo breakdown of AI code ratio and total lines added in the period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "custom": { "align": "auto", "cellOptions": { "type": "auto" }, "filterable": true, "inspect": false },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 40 }] }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "ai_code_ratio" },
+            "properties": [
+              { "id": "displayName", "value": "AI Code %" },
+              { "id": "unit", "value": "percent" },
+              { "id": "custom.cellOptions", "value": { "type": "color-background" } },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [{ "color": "blue", "value": null }, { "color": "green", "value": 20 }, { "color": "yellow", "value": 40 }] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "total_lines" },
+            "properties": [{ "id": "displayName", "value": "Total Lines Added" }, { "id": "unit", "value": "short" }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "ai_lines" },
+            "properties": [{ "id": "displayName", "value": "AI Lines Added" }, { "id": "unit", "value": "short" }]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 16, "x": 8, "y": 16 },
+      "id": 9,
+      "options": { "cellHeight": "sm", "footer": { "countRows": false, "enablePagination": false, "fields": "", "reducer": ["sum"], "show": false }, "showHeader": true },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  repo_id,\n  SUM(ai_lines_added) AS ai_lines,\n  SUM(total_lines_added) AS total_lines,\n  ROUND(SUM(ai_lines_added) / NULLIF(SUM(total_lines_added), 0) * 100, 1) AS ai_code_ratio\nFROM _tool_aicode_daily_aggregates\nWHERE\n  date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND connection_id = $connection_id\nGROUP BY repo_id\nORDER BY ai_code_ratio DESC",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "AI Code Ratio by Repository",
+      "type": "table"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Daily active Copilot users and total chat interactions.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line", "fillOpacity": 10, "gradientMode": "none", "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "lineInterpolation": "smooth", "lineWidth": 2, "pointSize": 5, "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false, "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" } },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+      "id": 10,
+      "options": { "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi", "sort": "none" } },
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  date AS time,\n  total_active_users AS 'Active Users',\n  total_engaged_users AS 'Engaged Users (completions)',\n  chat_engaged_users AS 'Chat Users'\nFROM _tool_aicode_copilot_metrics\nWHERE\n  $__timeFilter(date)\n  AND connection_id = $connection_id\nORDER BY date ASC",
+          "refId": "A",
+          "format": "time_series"
+        }
+      ],
+      "title": "Copilot User Adoption Over Time",
+      "type": "timeseries"
+    },
+
+    {
+      "datasource": "mysql",
+      "description": "Daily AI vs. Human commits across all tracked repos.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "bars", "fillOpacity": 60, "gradientMode": "none", "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "lineInterpolation": "linear", "lineWidth": 1, "pointSize": 5, "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false, "stacking": { "group": "A", "mode": "normal" }, "thresholdsStyle": { "mode": "off" } },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+      "id": 11,
+      "options": { "legend": { "calcs": ["sum"], "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi", "sort": "none" } },
+      "targets": [
+        {
+          "datasource": "mysql",
+          "rawSql": "SELECT\n  date AS time,\n  SUM(ai_commits) AS 'AI Commits',\n  SUM(human_commits) AS 'Human Commits'\nFROM _tool_aicode_daily_aggregates\nWHERE\n  $__timeFilter(date)\n  AND connection_id = $connection_id\nGROUP BY date\nORDER BY date ASC",
+          "refId": "A",
+          "format": "time_series"
+        }
+      ],
+      "title": "AI vs. Human Commits (stacked)",
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 38,
+  "tags": ["fourkites", "ai-code", "hackathon-2026"],
+  "templating": {
+    "list": [
+      {
+        "current": { "selected": false, "text": "30", "value": "30" },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Days",
+        "multi": false,
+        "name": "interval_days",
+        "options": [
+          { "selected": false, "text": "7", "value": "7" },
+          { "selected": false, "text": "14", "value": "14" },
+          { "selected": true, "text": "30", "value": "30" },
+          { "selected": false, "text": "90", "value": "90" }
+        ],
+        "query": "7,14,30,90",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": { "selected": false, "text": "1", "value": "1" },
+        "datasource": "mysql",
+        "definition": "SELECT id FROM _tool_aicode_connections",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Connection",
+        "multi": false,
+        "name": "connection_id",
+        "query": "SELECT id FROM _tool_aicode_connections",
+        "refresh": 1,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": { "from": "now-30d", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "FourKites – AI Code Impact",
+  "uid": "fk-ai-code-impact",
+  "version": 1,
+  "weekStart": ""
+}

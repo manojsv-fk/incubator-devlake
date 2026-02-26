@@ -1,0 +1,82 @@
+{
+  "_comment": "FourKites Engineering Signals – DevLake Blueprint example. Import via DevLake UI → Blueprints → Create.",
+  "name": "FourKites Engineering Signals",
+  "mode": "NORMAL",
+  "cronConfig": "0 6 * * *",
+  "isManual": false,
+  "skipOnFail": true,
+  "settings": {
+    "version": "2.0.0",
+    "connections": [
+      {
+        "_comment": "GitHub – Code Quality + PR metrics",
+        "plugin": "github",
+        "connectionId": 1,
+        "scopes": [
+          {
+            "id": "fourkites/platform-services",
+            "entities": ["CODE", "TICKET", "CROSS"]
+          },
+          {
+            "id": "fourkites/shipment-service",
+            "entities": ["CODE", "TICKET", "CROSS"]
+          }
+        ]
+      },
+      {
+        "_comment": "Jenkins – Deployment frequency, cycle time, CFR",
+        "plugin": "jenkins",
+        "connectionId": 1,
+        "scopes": [
+          {
+            "id": "platform-services/deploy-prod",
+            "entities": ["CICD"]
+          },
+          {
+            "id": "shipment-service/deploy-prod",
+            "entities": ["CICD"]
+          }
+        ]
+      },
+      {
+        "_comment": "Jira – Work type, bugs, MTTR tickets, time tracking",
+        "plugin": "jira",
+        "connectionId": 1,
+        "scopes": [
+          {
+            "id": "42",
+            "entities": ["TICKET"]
+          }
+        ]
+      },
+      {
+        "_comment": "DORA – Calculates Deployment Frequency, CFR, MTTR, Lead Time from above data",
+        "plugin": "dora",
+        "connectionId": 0,
+        "scopes": []
+      },
+      {
+        "_comment": "AI Code Impact – Copilot metrics + commit trailer analysis (custom plugin)",
+        "plugin": "aicode",
+        "connectionId": 1,
+        "scopes": [
+          {
+            "id": "fourkites",
+            "entities": ["CROSS"]
+          }
+        ]
+      },
+      {
+        "_comment": "Chronosphere – Alert events for MTTR and Change Failure Rate (custom plugin)",
+        "plugin": "chronosphere",
+        "connectionId": 1,
+        "scopes": [
+          {
+            "id": "platform",
+            "entities": ["CROSS"]
+          }
+        ]
+      }
+    ]
+  }
+}
