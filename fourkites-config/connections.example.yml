@@ -1,0 +1,82 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# FourKites DevLake – Connection Configuration (example values)
+# Copy this file and fill in real values before running.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ─── GitHub ──────────────────────────────────────────────────────────────────
+# Plugin: github  (already bundled in DevLake)
+# Required PAT scopes: repo, read:org, read:user
+github:
+  - name: "FourKites GitHub"
+    endpoint: "https://api.github.com/"
+    # Create PAT at https://github.com/settings/tokens
+    token: "ghp_REPLACE_WITH_REAL_TOKEN"
+    # Scopes to collect (repository slugs under the fourkites org)
+    scopes:
+      - "fourkites/platform-services"
+      - "fourkites/shipment-service"
+      - "fourkites/frontend"
+      # add more repos here
+
+# ─── Jenkins ─────────────────────────────────────────────────────────────────
+# Plugin: jenkins  (already bundled in DevLake)
+jenkins:
+  - name: "FourKites Jenkins"
+    endpoint: "https://jenkins.fourkites.internal/"
+    username: "devlake-service-account"
+    password: "REPLACE_WITH_JENKINS_API_TOKEN"
+    # Jobs to collect – use the full job path
+    scopes:
+      - "platform-services/deploy-prod"
+      - "shipment-service/deploy-prod"
+      - "frontend/deploy-prod"
+    scopeConfig:
+      # Regex matching deployment builds
+      deploymentPattern: "(?i)deploy(-to)?-prod"
+      # Regex matching production environment
+      productionPattern: "(?i)prod(uction)?"
+
+# ─── Jira ────────────────────────────────────────────────────────────────────
+# Plugin: jira  (already bundled in DevLake)
+jira:
+  - name: "FourKites Jira"
+    endpoint: "https://fourkites.atlassian.net/rest/agile/1.0/"
+    email: "devlake@fourkites.com"
+    token: "REPLACE_WITH_JIRA_API_TOKEN"
+    scopes:
+      - boardId: 42    # Engineering board
+        projectKey: "PLAT"
+      - boardId: 55
+        projectKey: "SHP"
+    scopeConfig:
+      issueTypeBug: "(?i)Bug"
+      issueTypeRequirement: "(?i)(Story|Feature|Requirement)"
+      issueTypeIncident: "(?i)Incident"
+
+# ─── AI Code Impact (aicode plugin – FourKites custom) ───────────────────────
+# Plugin: aicode  (this branch – backend/plugins/aicode)
+# Required PAT scopes: manage_billing:copilot OR read:org  +  repo
+aicode:
+  - name: "FourKites AI Code Metrics"
+    endpoint: "https://api.github.com/"
+    token: "ghp_REPLACE_WITH_COPILOT_METRICS_TOKEN"
+    orgLogin: "fourkites"
+    scopes:
+      - orgLogin: "fourkites"
+    scopeConfig:
+      copilotTrailerPattern: "(?i)co-authored-by:.*copilot"
+      claudeTrailerPattern:  "(?i)co-authored-by:.*claude"
+      genericAiTrailerPattern: "(?i)(generated-by|co-authored-by):.*\\b(ai|bot)\\b"
+      aiSurvivalDays: 14
+
+# ─── Chronosphere (MTTR / Change Failure Rate) ───────────────────────────────
+# Plugin: chronosphere  (this branch – backend/plugins/chronosphere)
+chronosphere:
+  - name: "FourKites Chronosphere"
+    endpoint: "https://fourkites.chronosphere.io/api/v1/"
+    # API token from Chronosphere → Settings → API Tokens
+    token: "REPLACE_WITH_CHRONOSPHERE_TOKEN"
+    orgSlug: "fourkites"
+    scopes:
+      - namespace: "platform"
+      - namespace: "shipment"
