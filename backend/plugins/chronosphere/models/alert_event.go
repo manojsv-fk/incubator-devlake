@@ -132,4 +132,4 @@ type ChronosphereApiParams struct {
 }
 
 // Compile-time check: ChronosphereAlertEvent → devops domain (for future converter).
-var _ = (*devops.CICDDeploymentCommit)(nil)
+var _ = (*devops.CicdDeploymentCommit)(nil)
