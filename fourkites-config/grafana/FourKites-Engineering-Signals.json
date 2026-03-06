@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": { "type": "datasource", "uid": "grafana" },
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -18,51 +21,120 @@
   "graphTooltip": 0,
   "id": null,
   "links": [
-    { "icon": "external link", "tags": [], "title": "DORA Metrics", "tooltip": "Open DORA dashboard", "type": "link", "url": "/grafana/d/qcDXVpzVk/dora" },
-    { "icon": "external link", "tags": [], "title": "AI Code Impact", "tooltip": "Open AI Code Impact dashboard", "type": "link", "url": "/grafana/d/fk-ai-code-impact" }
+    {
+      "icon": "external link",
+      "tags": [],
+      "title": "DORA Metrics",
+      "tooltip": "Open DORA dashboard",
+      "type": "link",
+      "url": "/grafana/d/qcDXVpzVk/dora"
+    },
+    {
+      "icon": "external link",
+      "tags": [],
+      "title": "AI Code Impact",
+      "tooltip": "Open AI Code Impact dashboard",
+      "type": "link",
+      "url": "/grafana/d/fk-ai-code-impact"
+    }
   ],
   "liveNow": false,
   "panels": [
-
     {
-      "datasource": { "type": "datasource", "uid": "grafana" },
-      "gridPos": { "h": 3, "w": 24, "x": 0, "y": 0 },
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
       "id": 1,
       "options": {
-        "code": { "language": "plaintext", "showLineNumbers": false, "showMiniMap": false },
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
         "content": "**FourKites Engineering Signals MVP** — 22 P0 metrics across 5 categories, powered by DevLake.\n\nData sources: GitHub · Jenkins · Jira · Chronosphere · Copilot (aicode plugin). Use the dropdowns to filter by project or time range.",
         "mode": "markdown"
       },
       "pluginVersion": "11.0.0",
-      "targets": [{ "datasource": { "type": "datasource", "uid": "grafana" }, "queryType": "randomWalk", "refId": "A" }],
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
       "title": "Dashboard Introduction",
       "type": "text"
     },
-
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 3 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
       "id": 100,
       "title": "📝 Code Dev & AI",
       "type": "row"
     },
-
     {
       "datasource": "mysql",
       "description": "Average commits per active contributor per day in the selected period.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "blue", "value": null }, { "color": "green", "value": 1 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
           "unit": "short",
           "decimals": 2
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 4 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 4
+      },
       "id": 10,
-      "options": { "colorMode": "background", "graphMode": "area", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
@@ -75,27 +147,62 @@
       "title": "Commit Frequency (commits/dev/day)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Code churn: lines added + lines deleted as a percentage of total lines modified.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 40 }, { "color": "red", "value": 60 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          },
           "unit": "percent"
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 4 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 4
+      },
       "id": 11,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  ROUND(\n    SUM(additions + deletions) / NULLIF(SUM(additions + deletions + GREATEST(additions - deletions, 0)), 0) * 100\n  , 1) AS churn_pct\nFROM pull_requests\nWHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND status = 'MERGED'",
+          "rawSql": "SELECT\n  ROUND(\n    SUM(cf_del.deletions)\n    / NULLIF(SUM(cf_add.additions), 0) * 100\n  , 1) AS churn_pct\nFROM commit_files cf_add\nJOIN commits c_add  ON c_add.sha  = cf_add.commit_sha\nJOIN commit_files cf_del ON cf_del.file_path = cf_add.file_path\nJOIN commits c_del  ON c_del.sha  = cf_del.commit_sha\nWHERE c_add.authored_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND c_del.authored_date BETWEEN c_add.authored_date\n                               AND DATE_ADD(c_add.authored_date, INTERVAL 14 DAY)\n  AND c_del.sha    != c_add.sha\n  AND cf_del.deletions > 0",
           "refId": "A",
           "format": "table"
         }
@@ -103,23 +210,58 @@
       "title": "Code Churn %",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Average cyclomatic complexity of changed files. Sourced from gitextractor plugin.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 10 }, { "color": "red", "value": 20 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
           "unit": "short",
           "decimals": 1
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 4 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 4
+      },
       "id": 12,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
@@ -132,22 +274,57 @@
       "title": "Code Complexity Score (avg)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Percentage of total new lines added that were AI-generated (Copilot + Claude).",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "blue", "value": null }, { "color": "green", "value": 20 }, { "color": "yellow", "value": 40 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 20
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              }
+            ]
+          },
           "unit": "percent"
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 12, "y": 4 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 4
+      },
       "id": 13,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
@@ -160,36 +337,75 @@
       "title": "AI-Generated Lines %",
       "type": "stat"
     },
-
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 8 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
       "id": 101,
       "title": "🔀 PR & Review Analytics",
       "type": "row"
     },
-
     {
       "datasource": "mysql",
       "description": "Median time from first commit in a PR branch to PR open.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 1440 }, { "color": "red", "value": 4320 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1440
+              },
+              {
+                "color": "red",
+                "value": 4320
+              }
+            ]
+          },
           "unit": "m",
           "decimals": 0
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 9 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 9
+      },
       "id": 20,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  ROUND(AVG(TIMESTAMPDIFF(MINUTE, first_committed_at, created_date)), 0) AS time_commit_to_pr_min\nFROM pull_requests\nWHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND first_committed_at IS NOT NULL",
+          "rawSql": "SELECT\n  ROUND(\n    AVG(TIMESTAMPDIFF(MINUTE, m.first_commit_authored_date, m.pr_created_date))\n  , 0) AS time_commit_to_pr_min\nFROM project_pr_metrics m\nWHERE m.pr_created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND m.first_commit_authored_date IS NOT NULL\n  AND m.pr_created_date > m.first_commit_authored_date",
           "refId": "A",
           "format": "table"
         }
@@ -197,28 +413,63 @@
       "title": "Time Commit → PR (avg min)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Average number of review round-trips per merged PR.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 3 }, { "color": "red", "value": 6 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 3
+              },
+              {
+                "color": "red",
+                "value": 6
+              }
+            ]
+          },
           "unit": "short",
           "decimals": 1
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 9 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 9
+      },
       "id": 21,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  ROUND(AVG(review_rounds), 1) AS review_cycles\nFROM pull_requests\nWHERE merged_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND status = 'MERGED'",
+          "rawSql": "SELECT\n  ROUND(AVG(review_count), 1) AS review_cycles\nFROM (\n  SELECT\n    prc.pull_request_id,\n    COUNT(DISTINCT DATE(prc.created_date)) AS review_count\n  FROM pull_request_comments prc\n  JOIN pull_requests pr ON pr.id = prc.pull_request_id\n  WHERE pr.merged_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n    AND pr.status     = 'MERGED'\n    AND prc.account_id != pr.author_id\n  GROUP BY prc.pull_request_id\n  HAVING review_count > 0\n) t",
           "refId": "A",
           "format": "table"
         }
@@ -226,25 +477,55 @@
       "title": "Review Cycles (avg per PR)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Work type breakdown: Feature / Bug / Technical Debt / Other, from Jira issue types.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": { "hideFrom": { "legend": false, "tooltip": false, "viz": false } },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
           "mappings": []
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 9 },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 9
+      },
       "id": 22,
-      "options": { "displayLabels": ["name", "percent"], "legend": { "displayMode": "table", "placement": "right", "showLegend": true, "values": ["percent"] }, "pieType": "pie", "tooltip": { "mode": "single", "sort": "none" } },
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  COALESCE(type_dev_cost, 'Other') AS work_type,\n  COUNT(*) AS issues\nFROM issues\nWHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\nGROUP BY type_dev_cost\nORDER BY issues DESC",
+          "rawSql": "SELECT\n  CASE\n    WHEN type = 'REQUIREMENT' THEN 'Feature'\n    WHEN type = 'BUG'         THEN 'Bug Fix'\n    WHEN type = 'INCIDENT'    THEN 'Incident'\n    WHEN type = 'TASK'        THEN 'Task'\n    ELSE COALESCE(original_type, 'Other')\n  END AS work_type,\n  COUNT(*) AS issues\nFROM issues\nWHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\nGROUP BY work_type\nORDER BY issues DESC",
           "refId": "A",
           "format": "table"
         }
@@ -252,33 +533,84 @@
       "title": "Work Type Classification",
       "type": "piechart"
     },
-
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 17 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
       "id": 102,
       "title": "🚀 Build, Test & Deploy (DORA)",
       "type": "row"
     },
-
     {
       "datasource": "mysql",
       "description": "DORA Deployment Frequency – how often deployments to production occur.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [
-            { "options": { "elite": { "color": "green", "text": "Elite (>1/day)" }, "high": { "color": "light-green", "text": "High (1/week)" }, "medium": { "color": "yellow", "text": "Medium (1/month)" }, "low": { "color": "red", "text": "Low (<1/month)" } }, "type": "value" }
+            {
+              "options": {
+                "elite": {
+                  "color": "green",
+                  "text": "Elite (>1/day)"
+                },
+                "high": {
+                  "color": "light-green",
+                  "text": "High (1/week)"
+                },
+                "medium": {
+                  "color": "yellow",
+                  "text": "Medium (1/month)"
+                },
+                "low": {
+                  "color": "red",
+                  "text": "Low (<1/month)"
+                }
+              },
+              "type": "value"
+            }
           ],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
           "unit": "short",
           "decimals": 2
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 18 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 18
+      },
       "id": 30,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
@@ -291,28 +623,63 @@
       "title": "Deployment Frequency (deploys/day)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Total cycle time from first commit to production deployment (median).",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 1440 }, { "color": "red", "value": 10080 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1440
+              },
+              {
+                "color": "red",
+                "value": 10080
+              }
+            ]
+          },
           "unit": "m",
           "decimals": 0
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 18 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 18
+      },
       "id": 31,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  ROUND(AVG(lead_time_minutes), 0) AS total_cycle_time_min\nFROM pull_requests\nWHERE merged_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND status = 'MERGED'\n  AND lead_time_minutes IS NOT NULL",
+          "rawSql": "SELECT\n  ROUND(AVG(m.pr_cycle_time), 0) AS total_cycle_time_min\nFROM project_pr_metrics m\nWHERE m.pr_merged_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND m.pr_cycle_time IS NOT NULL\n  AND m.pr_cycle_time > 0",
           "refId": "A",
           "format": "table"
         }
@@ -320,27 +687,62 @@
       "title": "Total Cycle Time (avg, min)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Change Failure Rate: % of deployments that caused a production alert (via Chronosphere).",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 5 }, { "color": "red", "value": 15 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 15
+              }
+            ]
+          },
           "unit": "percent"
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 18 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 18
+      },
       "id": 32,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  ROUND(\n    SUM(CASE WHEN change_failure = 1 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0) * 100\n  , 1) AS cfr_pct\nFROM cicd_deployments\nWHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)",
+          "rawSql": "SELECT\n  ROUND(\n    COUNT(DISTINCT r.deployment_id)\n    / NULLIF(\n        (SELECT COUNT(*)\n         FROM cicd_deployments\n         WHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n           AND result = 'SUCCESS'),\n        0\n      ) * 100\n  , 1) AS cfr_pct\nFROM project_incident_deployment_relationships r\nJOIN incidents i ON i.id = r.id\nWHERE i.created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)",
           "refId": "A",
           "format": "table"
         }
@@ -348,31 +750,70 @@
       "title": "Change Failure Rate %",
       "type": "stat"
     },
-
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 22 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
       "id": 103,
       "title": "🔥 Post-Deploy Stability",
       "type": "row"
     },
-
     {
       "datasource": "mysql",
       "description": "MTTR: average time from alert firing to resolution (from Chronosphere incidents).",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 60 }, { "color": "red", "value": 240 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 60
+              },
+              {
+                "color": "red",
+                "value": 240
+              }
+            ]
+          },
           "unit": "m",
           "decimals": 0
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 23 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 23
+      },
       "id": 40,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
@@ -385,27 +826,62 @@
       "title": "MTTR (avg, minutes)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Number of hotfix deployments in the period (Jenkins jobs matching 'hotfix' pattern).",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 3 }, { "color": "red", "value": 8 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 3
+              },
+              {
+                "color": "red",
+                "value": 8
+              }
+            ]
+          },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 23 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 23
+      },
       "id": 41,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  COUNT(*) AS hotfix_deploys\nFROM cicd_deployments\nWHERE\n  created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND name REGEXP '(?i)hotfix'",
+          "rawSql": "SELECT\n  COUNT(*) AS hotfix_deploys\nFROM cicd_deployments\nWHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND (\n       name          REGEXP '(?i)(hotfix|hot.?fix|rollback|revert|emergency|patch)'\n    OR display_title REGEXP '(?i)(hotfix|hot.?fix|rollback|revert|emergency|patch)'\n  )",
           "refId": "A",
           "format": "table"
         }
@@ -413,22 +889,57 @@
       "title": "Hotfix Deployments",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Total bugs opened in Jira in the selected period.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 10 }, { "color": "red", "value": 25 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 25
+              }
+            ]
+          },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 23 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 23
+      },
       "id": 42,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
@@ -441,21 +952,52 @@
       "title": "Bugs Introduced",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Bug severity distribution: Critical / High / Medium / Low.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": { "hideFrom": { "legend": false, "tooltip": false, "viz": false } },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
           "mappings": []
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 8, "x": 12, "y": 23 },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 12,
+        "y": 23
+      },
       "id": 43,
-      "options": { "displayLabels": ["name", "percent"], "legend": { "displayMode": "table", "placement": "right", "showLegend": true, "values": ["value", "percent"] }, "pieType": "donut", "tooltip": { "mode": "single", "sort": "none" } },
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
       "targets": [
         {
           "datasource": "mysql",
@@ -467,21 +1009,51 @@
       "title": "Bug Severity Distribution",
       "type": "piechart"
     },
-
     {
       "datasource": "mysql",
       "description": "% of total dev time spent on new features vs. maintenance/bugs.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": { "hideFrom": { "legend": false, "tooltip": false, "viz": false } },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
           "mappings": []
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 27 },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 27
+      },
       "id": 44,
-      "options": { "displayLabels": ["name", "percent"], "legend": { "displayMode": "table", "placement": "right", "showLegend": true, "values": ["percent"] }, "pieType": "pie", "tooltip": { "mode": "single", "sort": "none" } },
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
       "targets": [
         {
           "datasource": "mysql",
@@ -493,35 +1065,74 @@
       "title": "Time on Features % vs Maintenance %",
       "type": "piechart"
     },
-
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 35 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
       "id": 104,
       "title": "📊 Business & Developer Experience",
       "type": "row"
     },
-
     {
       "datasource": "mysql",
       "description": "Unplanned work: % of issues created and resolved that were not in the sprint plan.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 20 }, { "color": "red", "value": 35 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 35
+              }
+            ]
+          },
           "unit": "percent"
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 36 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 36
+      },
       "id": 50,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  ROUND(\n    SUM(CASE WHEN is_bug = 1 OR type = 'INCIDENT' THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0) * 100\n  , 1) AS unplanned_pct\nFROM issues\nWHERE\n  created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)",
+          "rawSql": "SELECT\n  ROUND(\n    SUM(CASE WHEN type IN ('BUG', 'INCIDENT') THEN 1 ELSE 0 END)\n    / NULLIF(COUNT(*), 0) * 100\n  , 1) AS unplanned_pct\nFROM issues\nWHERE created_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)",
           "refId": "A",
           "format": "table"
         }
@@ -529,27 +1140,62 @@
       "title": "Unplanned Work %",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Say/Do ratio: stories completed vs. committed at sprint start.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "yellow", "value": 70 }, { "color": "green", "value": 90 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 70
+              },
+              {
+                "color": "green",
+                "value": 90
+              }
+            ]
+          },
           "unit": "percent"
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 36 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 36
+      },
       "id": 51,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": "mysql",
-          "rawSql": "SELECT\n  ROUND(\n    SUM(CASE WHEN status = 'DONE' THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0) * 100\n  , 1) AS say_do_ratio\nFROM issues\nWHERE\n  sprint_id IN (\n    SELECT id FROM sprints\n    WHERE completed_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  )",
+          "rawSql": "SELECT\n  ROUND(\n    SUM(CASE WHEN i.status = 'DONE' THEN 1 ELSE 0 END)\n    / NULLIF(COUNT(*), 0) * 100\n  , 1) AS say_do_ratio\nFROM issues i\nJOIN sprint_issues si ON si.issue_id = i.id\nJOIN sprints s        ON s.id = si.sprint_id\nWHERE s.completed_date >= DATE_SUB(NOW(), INTERVAL $__interval_days DAY)\n  AND s.status = 'CLOSED'",
           "refId": "A",
           "format": "table"
         }
@@ -557,23 +1203,58 @@
       "title": "Say/Do Ratio %",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Context switching: average number of distinct epics/projects an engineer touches per week.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 3 }, { "color": "red", "value": 5 }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 3
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          },
           "unit": "short",
           "decimals": 1
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 36 },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 36
+      },
       "id": 52,
-      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "textMode": "auto" },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "pluginVersion": "11.0.0",
       "targets": [
         {
@@ -586,23 +1267,82 @@
       "title": "Context Switching Freq (epics/dev/wk)",
       "type": "stat"
     },
-
     {
       "datasource": "mysql",
       "description": "Weekly trend of all key engineering health indicators.",
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line", "fillOpacity": 5, "gradientMode": "none", "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "lineInterpolation": "smooth", "lineWidth": 2, "pointSize": 4, "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false, "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" } },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 5,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
           "mappings": [],
-          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
           "unit": "short"
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 40 },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
       "id": 60,
-      "options": { "legend": { "calcs": ["mean", "lastNotNull", "max"], "displayMode": "table", "placement": "right", "showLegend": true }, "tooltip": { "mode": "multi", "sort": "none" } },
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
       "targets": [
         {
           "datasource": "mysql",
@@ -634,21 +1374,46 @@
     }
   ],
   "schemaVersion": 38,
-  "tags": ["fourkites", "engineering-signals", "hackathon-2026", "overview"],
+  "tags": [
+    "fourkites",
+    "engineering-signals",
+    "hackathon-2026",
+    "overview"
+  ],
   "templating": {
     "list": [
       {
-        "current": { "selected": false, "text": "30", "value": "30" },
+        "current": {
+          "selected": false,
+          "text": "30",
+          "value": "30"
+        },
         "hide": 0,
         "includeAll": false,
         "label": "Days",
         "multi": false,
         "name": "interval_days",
         "options": [
-          { "selected": false, "text": "7", "value": "7" },
-          { "selected": false, "text": "14", "value": "14" },
-          { "selected": true, "text": "30", "value": "30" },
-          { "selected": false, "text": "90", "value": "90" }
+          {
+            "selected": false,
+            "text": "7",
+            "value": "7"
+          },
+          {
+            "selected": false,
+            "text": "14",
+            "value": "14"
+          },
+          {
+            "selected": true,
+            "text": "30",
+            "value": "30"
+          },
+          {
+            "selected": false,
+            "text": "90",
+            "value": "90"
+          }
         ],
         "query": "7,14,30,90",
         "queryValue": "",
@@ -657,7 +1422,10 @@
       }
     ]
   },
-  "time": { "from": "now-30d", "to": "now" },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
   "timepicker": {},
   "timezone": "browser",
   "title": "FourKites – Engineering Signals Overview",

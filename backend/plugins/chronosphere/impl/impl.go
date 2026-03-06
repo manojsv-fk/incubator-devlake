@@ -78,6 +78,7 @@ func (p Chronosphere) SubTaskMetas() []plugin.SubTaskMeta {
 	return []plugin.SubTaskMeta{
 		tasks.CollectAlertEventsMeta,
 		tasks.ExtractAlertEventsMeta,
+		tasks.ConvertAlertsToCfrMeta,
 	}
 }
 
